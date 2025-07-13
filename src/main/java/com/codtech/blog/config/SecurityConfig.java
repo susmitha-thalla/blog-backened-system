@@ -23,6 +23,12 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    /**
+     * Configures the security filter chain for HTTP requests.
+     * @param http The HttpSecurity object.
+     * @return The configured SecurityFilterChain.
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -36,14 +42,23 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Provides a BCrypt password encoder bean.
+     * @return PasswordEncoder instance.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Provides an AuthenticationManager bean.
+     * @param config The authentication configuration.
+     * @return AuthenticationManager instance.
+     * @throws Exception
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 }
-

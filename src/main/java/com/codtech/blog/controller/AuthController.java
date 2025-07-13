@@ -27,6 +27,11 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Registers a new user with encoded password.
+     * @param user The user to register.
+     * @return Success message.
+     */
     @PostMapping("/register")
     public String register(@RequestBody User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -34,6 +39,11 @@ public class AuthController {
         return "User registered successfully";
     }
 
+    /**
+     * Authenticates a user and returns a JWT token if successful.
+     * @param user The user credentials.
+     * @return JWT token or error message.
+     */
     @PostMapping("/login")
     public String login(@RequestBody User user) {
         try {
@@ -47,4 +57,3 @@ public class AuthController {
         return jwtUtil.generateToken(userDetails);
     }
 }
-

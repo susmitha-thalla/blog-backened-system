@@ -15,12 +15,23 @@ public class CommentServiceImpl implements CommentService {
         this.commentRepository = commentRepository;
     }
 
+    /**
+     * Adds a comment to a blog.
+     * @param blog The blog to comment on.
+     * @param comment The comment to add.
+     * @return The saved comment.
+     */
     @Override
     public Comment addCommentToBlog(Blog blog, Comment comment) {
         comment.setBlog(blog);
         return commentRepository.save(comment);
     }
 
+    /**
+     * Retrieves all comments for a given blog.
+     * @param blog The blog to get comments for.
+     * @return List of comments.
+     */
     @Override
     public List<Comment> getCommentsByBlog(Blog blog) {
         return commentRepository.findByBlog(blog);
